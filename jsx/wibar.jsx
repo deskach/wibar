@@ -55,7 +55,8 @@ var ProgressBarSelect = React.createClass({
     }
 
     return (
-      <select onChange={ this.onChange }>
+      <select className="selectpicker"
+        onChange={ this.onChange }>
         { options }
       </select>
     );
