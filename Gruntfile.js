@@ -22,13 +22,7 @@
           {
             expand: true,
             flatten: true,
-            src: ['bootstrap/*'], dest: '../Web/bootstrap/',
-            filter: 'isFile'
-          },
-          {
-            expand: true,
-            flatten: true,
-            src: ['css/*'], dest: '../Web/css/',
+            src: ['style/*'], dest: '../Web/style/',
             filter: 'isFile'
           },
           {
@@ -36,13 +30,7 @@
             flatten: true,
             src: ['js/*'], dest: '../Web/js/',
             filter: 'isFile'
-          },
-          {
-            expand: true,
-            flatten: true,
-            src: ['media/*'], dest: '../Web/media/',
-            filter: 'isFile'
-          },
+          }
         ],
       },
     },
