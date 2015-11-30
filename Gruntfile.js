@@ -11,7 +11,21 @@
       },
       dist: {
         files: {
-          '../Web/index.html': ['index.html']
+          '../ghPages/wibar/index.html': ['index.html']
+        }
+      }
+    },
+
+    cssmin: {
+      options: {
+        shorthandCompacting: false,
+        roundingPrecision: -1
+      },
+      dist: {
+        files: {
+          '../ghPages/wibar/style/style-min.css': [
+            'style/style.css'
+          ]
         }
       }
     },
@@ -22,13 +36,7 @@
           {
             expand: true,
             flatten: true,
-            src: ['style/*'], dest: '../Web/style/',
-            filter: 'isFile'
-          },
-          {
-            expand: true,
-            flatten: true,
-            src: ['js/*'], dest: '../Web/js/',
+            src: ['js/*'], dest: '../ghPages/wibar/js/',
             filter: 'isFile'
           }
         ],
@@ -62,11 +70,14 @@
 
   // Load the plugins
   grunt.loadNpmTasks('grunt-processhtml');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-react');
   //grunt.loadNpmTasks('grunt-browserify');
 
   // Default task(s).
   grunt.registerTask('default', ['react']);
-  grunt.registerTask('build', ['react', 'processhtml', 'copy']);
+  grunt.registerTask('build', [
+    'react', 'cssmin', 'processhtml', 'copy'
+  ]);
 };

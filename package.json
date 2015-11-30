@@ -12,7 +12,9 @@
     "grunt-react": "^0.12.3",
     "react": "^0.14.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "grunt-contrib-cssmin": "^0.14.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
