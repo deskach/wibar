@@ -1,0 +1,2 @@
+# wibar
+a test exercise
