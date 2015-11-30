@@ -3,20 +3,6 @@ var WiProgressBar = React.createClass({displayName: "WiProgressBar",
     return this.props.value.toString() + '%';
   },
 
-  //increment: function(increment) {
-  //  var newVal = this.state.value + increment;
-  //
-  //  if (newVal < 0) {
-  //    newVal = 0;
-  //  } else if(newVal > 100) {
-  //    newVal = 100;
-  //  }
-  //
-  //  this.setState({
-  //    value: newVal
-  //  });
-  //},
-
   render: function () {
     var val = this.props.value;
 
@@ -29,7 +15,7 @@ var WiProgressBar = React.createClass({displayName: "WiProgressBar",
              "aria-valuemax": "100", 
              style: {width: this.percentVal()}
         }, 
-          this.percentVal()
+          React.createElement("span", null, " ", this.percentVal(), " ")
         )
       )
     );
@@ -60,10 +46,18 @@ var MainApp = React.createClass({displayName: "MainApp",
   },
 
   incrementActiveBar: function(value) {
-    var idx = this.state.activeBar;
-    var barValues = this.state.barValues;
+    var idx = this.state.activeBar,
+      barValues = this.state.barValues,
+      newValue = barValues[idx] + parseInt(value)
+      ;
 
-    barValues[idx] += parseInt(value);
+    if(newValue < 0) {
+      newValue = 0;
+    } else if (newValue > 100) {
+      newValue = 100;
+    }
+
+    barValues[idx] = newValue;
 
     this.setState({
       barValues: barValues
