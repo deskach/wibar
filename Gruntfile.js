@@ -30,18 +30,18 @@
       }
     },
 
-    copy: {
-      main: {
-        files: [
-          {
-            expand: true,
-            flatten: true,
-            src: ['js/*'], dest: '../ghPages/wibar/js/',
-            filter: 'isFile'
-          }
-        ],
-      },
-    },
+    //copy: {
+    //  main: {
+    //    files: [
+    //      {
+    //        expand: true,
+    //        flatten: true,
+    //        src: ['js/*'], dest: '../ghPages/wibar/js/',
+    //        filter: 'isFile'
+    //      }
+    //    ],
+    //  },
+    //},
 
     react: {
       dynamic_mappings: {
@@ -57,6 +57,14 @@
       }
     },
 
+    uglify: {
+      my_target: {
+        files: {
+          '../ghPages/wibar/js/wibar-min.js': ['js/wibar.js']
+        }
+      }
+    }
+
     //browserify:     {
     //  options:      {
     //    transform:  [ require('grunt-react').browserify ]
@@ -71,13 +79,14 @@
   // Load the plugins
   grunt.loadNpmTasks('grunt-processhtml');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-copy');
+  //grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-react');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   //grunt.loadNpmTasks('grunt-browserify');
 
   // Default task(s).
   grunt.registerTask('default', ['react']);
   grunt.registerTask('build', [
-    'react', 'cssmin', 'processhtml', 'copy'
+    'react', 'cssmin', 'uglify', 'processhtml'
   ]);
 };
