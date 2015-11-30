@@ -37,12 +37,47 @@ var IncrementButton = React.createClass({displayName: "IncrementButton",
   }
 });
 
+var ProgressBarSelect = React.createClass({displayName: "ProgressBarSelect",
+  onChange: function(event) {
+    console.log("sel, sel.value", event.target.value);
+
+    this.props.setActiveBar(event.target.value);
+  },
+
+  render: function () {
+    var options = [];
+
+    for(var i = 0; i < this.props.barCount; i++) {
+      var name = '#progress' + (i + 1);
+
+      options.push((
+        React.createElement("option", {value: i}, name
+        )
+      ));
+    }
+
+    return (
+      React.createElement("select", {onChange:  this.onChange}, 
+         options 
+      )
+    );
+  }
+});
+
 var MainApp = React.createClass({displayName: "MainApp",
   getInitialState: function () {
     return {
-      barValues: [10],
+      barValues: [25, 50, 75],
       activeBar: 0
     };
+  },
+
+  setActiveBar: function (value) {
+    if (value >= 0 && value < this.state.barValues.length) {
+      this.setState({
+        activeBar: value
+      });
+    }
   },
 
   incrementActiveBar: function(value) {
@@ -65,15 +100,17 @@ var MainApp = React.createClass({displayName: "MainApp",
   },
 
   render: function () {
-    var p1 = (
-      React.createElement(WiProgressBar, {value: this.state.barValues[0]})
-    );
-
     return (
       React.createElement("div", {id: "ThreeBars"}, 
         React.createElement("h1", null, "Progress Bar Demo"), 
-        p1, 
+        React.createElement(WiProgressBar, {value: this.state.barValues[0]}), 
+        React.createElement(WiProgressBar, {value: this.state.barValues[1]}), 
+        React.createElement(WiProgressBar, {value: this.state.barValues[2]}), 
         React.createElement("hr", null), 
+        React.createElement(ProgressBarSelect, {
+          barCount:  this.state.barValues.length, 
+          setActiveBar:  this.setActiveBar}
+        ), " ", 
         React.createElement(IncrementButton, {
           value: "-25", 
           doIncrement: this.incrementActiveBar}

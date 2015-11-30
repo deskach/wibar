@@ -37,12 +37,45 @@ var IncrementButton = React.createClass({
   }
 });
 
+var ProgressBarSelect = React.createClass({
+  onChange: function(event) {
+    this.props.setActiveBar(event.target.value);
+  },
+
+  render: function () {
+    var options = [];
+
+    for(var i = 0; i < this.props.barCount; i++) {
+      var name = '#progress' + (i + 1);
+
+      options.push((
+        <option value={i}>{name}
+        </option>
+      ));
+    }
+
+    return (
+      <select onChange={ this.onChange }>
+        { options }
+      </select>
+    );
+  }
+});
+
 var MainApp = React.createClass({
   getInitialState: function () {
     return {
-      barValues: [10],
+      barValues: [25, 50, 75],
       activeBar: 0
     };
+  },
+
+  setActiveBar: function (value) {
+    if (value >= 0 && value < this.state.barValues.length) {
+      this.setState({
+        activeBar: value
+      });
+    }
   },
 
   incrementActiveBar: function(value) {
@@ -65,15 +98,17 @@ var MainApp = React.createClass({
   },
 
   render: function () {
-    var p1 = (
-      <WiProgressBar value={this.state.barValues[0]}/>
-    );
-
     return (
       <div id="ThreeBars">
         <h1>Progress Bar Demo</h1>
-        {p1}
+        <WiProgressBar value={this.state.barValues[0]}/>
+        <WiProgressBar value={this.state.barValues[1]}/>
+        <WiProgressBar value={this.state.barValues[2]}/>
         <hr/>
+        <ProgressBarSelect
+          barCount={ this.state.barValues.length }
+          setActiveBar = { this.setActiveBar }
+        />&nbsp;
         <IncrementButton
           value='-25'
           doIncrement={this.incrementActiveBar}
