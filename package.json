@@ -1,0 +1,29 @@
+{
+  "name": "wibar",
+  "version": "1.0.0",
+  "description": "A test exercise",
+  "main": "index.html",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-browserify": "^4.0.1",
+    "grunt-contrib-copy": "^0.8.2",
+    "grunt-contrib-cssmin": "^0.14.0",
+    "grunt-processhtml": "^0.3.8",
+    "grunt-react": "^0.12.3",
+    "react": "^0.14.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deskach/wibar.git"
+  },
+  "author": "Dzianis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/deskach/wibar/issues"
+  },
+  "homepage": "https://github.com/deskach/wibar#readme"
+}
