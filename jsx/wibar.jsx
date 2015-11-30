@@ -1,30 +1,24 @@
 var WiProgressBar = React.createClass({
-  getInitialState: function() {
-    return {
-      value: 40
-    };
-  },
-
   percentVal: function() {
-    return this.state.value.toString() + '%';
+    return this.props.value.toString() + '%';
   },
 
-  increment: function(increment) {
-    var newVal = this.state.value + increment;
-
-    if (newVal < 0) {
-      newVal = 0;
-    } else if(newVal > 100) {
-      newVal = 100;
-    }
-
-    this.setState({
-      value: newVal
-    });
-  },
+  //increment: function(increment) {
+  //  var newVal = this.state.value + increment;
+  //
+  //  if (newVal < 0) {
+  //    newVal = 0;
+  //  } else if(newVal > 100) {
+  //    newVal = 100;
+  //  }
+  //
+  //  this.setState({
+  //    value: newVal
+  //  });
+  //},
 
   render: function () {
-    var val = this.state.value;
+    var val = this.props.value;
 
     return (
       <div className='progress'>
@@ -43,38 +37,65 @@ var WiProgressBar = React.createClass({
 });
 
 var IncrementButton = React.createClass({
-  getInitialState: function () {
-    return {
-      value: 10
-    };
+  doIncrement: function() {
+    this.props.doIncrement(this.props.value);
   },
 
   render: function () {
-
+    return (
+      <button className="btn btn-default"
+              onClick = { this.doIncrement }>
+        { this.props.value }
+      </button>
+    );
   }
 });
 
 var MainApp = React.createClass({
   getInitialState: function () {
-    var p1 = (<WiProgressBar />);
-
     return {
-      p1: p1,
-      activeBar: p1
+      barValues: [10],
+      activeBar: 0
     };
   },
 
   incrementActiveBar: function(value) {
-    this.state.activeBar.increment(value);
+    var idx = this.state.activeBar;
+    var barValues = this.state.barValues;
+
+    barValues[idx] += parseInt(value);
+
+    this.setState({
+      barValues: barValues
+    });
   },
 
   render: function () {
-    var p1 = this.state.p1;
+    var p1 = (
+      <WiProgressBar value={this.state.barValues[0]}/>
+    );
 
     return (
       <div id="ThreeBars">
         <h1>Progress Bar Demo</h1>
         {p1}
+        <hr/>
+        <IncrementButton
+          value='-25'
+          doIncrement={this.incrementActiveBar}
+        />&nbsp;
+        <IncrementButton
+          value='-10'
+          doIncrement={this.incrementActiveBar}
+        />&nbsp;
+        <IncrementButton
+          value='+10'
+          doIncrement={this.incrementActiveBar}
+        />&nbsp;
+        <IncrementButton
+          value='+25'
+          doIncrement={this.incrementActiveBar}
+        />&nbsp;
       </div>
     )
   }
