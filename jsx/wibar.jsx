@@ -49,7 +49,7 @@ var ProgressBarSelect = React.createClass({
       var name = '#progress' + (i + 1);
 
       options.push((
-        <option value={i}>{name}
+        <option value={i} key={i}>{name}
         </option>
       ));
     }

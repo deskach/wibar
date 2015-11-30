@@ -39,8 +39,6 @@ var IncrementButton = React.createClass({displayName: "IncrementButton",
 
 var ProgressBarSelect = React.createClass({displayName: "ProgressBarSelect",
   onChange: function(event) {
-    console.log("sel, sel.value", event.target.value);
-
     this.props.setActiveBar(event.target.value);
   },
 
@@ -51,7 +49,7 @@ var ProgressBarSelect = React.createClass({displayName: "ProgressBarSelect",
       var name = '#progress' + (i + 1);
 
       options.push((
-        React.createElement("option", {value: i}, name
+        React.createElement("option", {value: i, key: i}, name
         )
       ));
     }
