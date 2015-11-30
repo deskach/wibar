@@ -1,5 +1,8 @@
 .progress {
     position: relative;
+    height: 3em;
+    background-color: white;
+    border: 1px solid lightgray;
 }
 
 .progress span {
@@ -7,15 +10,21 @@
     display: block;
     width: 100%;
     color: black;
+    padding-top: 0.5em;
+}
+
+.progress-bar {
+    background-color: lightblue;
 }
 
 .btn {
     padding: 0 0.5em 0 0.5em;
-    border: 1px solid gray;
+    border: 1px solid lightgray;
+    background-color: #eeeeee;
 }
 
 .selectpicker {
-    /*border: 1px solid gray;*/
+    border: 1px solid lightgray;
 }
 
 #container {
